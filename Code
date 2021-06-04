@@ -1,0 +1,52 @@
+/*
+ *******************************
+ We need : 16x2 LCD Display
+         : Liquid Crystal I2c Module
+         : Arduino Board 
+         : DHT11 Sensor 
+
+ ******************************
+ */
+
+
+#include<dht.h>
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+dht Sensor;
+void setup() {
+  Serial.begin(9600);
+
+  lcd.begin();
+
+  
+  
+  
+}
+
+void loop() {
+  int val = Sensor.read11(3);
+ 
+
+  Serial.print("Temperature: ");
+  Serial.print(Sensor.temperature,1);
+  Serial.print("\t Humidity: ");
+  Serial.println(Sensor.humidity,1);
+  delay(100);
+
+  lcd.setCursor(0,0);
+  lcd.print("Temperature:");
+  lcd.setCursor(12,0);
+  lcd.print(Sensor.temperature);
+  lcd.setCursor(0,1);
+  lcd.print("Humidity:");
+  lcd.setCursor(9,1);
+  lcd.print(Sensor.humidity);
+  
+  
+  
+  
+}
